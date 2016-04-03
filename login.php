@@ -1,6 +1,12 @@
  <?php
         error_reporting(0);
         session_start();
+        if($_GET['logout']==1 AND $_SESSION['id'])
+        {
+            session_destroy();
+        $msg="you have been successfully logged out!";
+            
+        }
        include("connection.php");
        if(isset($_POST['submit'])=="signup"){
             $error="";
@@ -22,7 +28,7 @@
                         $error.="password should contain atleast one Captial Letter <br/>";
             }
             if($error)
-                echo "there were errors in your signup details<br/>".$error;
+                $error="there were errors in your signup details<br/>".$error;
             else{
                 // $password_md=md5(md5($_POST['email'].$_POST['password']));
               
@@ -30,7 +36,7 @@
                $result=mysqli_query($link,$query);
            $results=mysqli_num_rows($result);
            if($results)
-               echo "The email address is already registered .if U want to login IN?";
+                $error="The email address is already registered .if U want to login IN?";
            else
            {
                $query="INSERT INTO users (email,password) VALUES('".mysqli_real_escape_string($link,$_POST['email'])."', '".($_POST['password'])."')";
@@ -39,7 +45,8 @@
                mysqli_query($link,$query);
                  echo "you were successfully signed!";
                  $_SESSION['id']=mysqli_insert_id($link);
-                 print_r($_SESSION);
+                // print_r($_SESSION);
+                  header("Location:mainpage.php");
  
            }
            
@@ -50,19 +57,20 @@
         { 
             if($_POST['submit']=="login"){
             
-        $x=mysqli_real_escape_string($link,$_POST['loginemail']); echo "$x   kaveri";
+        $x=mysqli_real_escape_string($link,$_POST['loginemail']); 
         $y=($_POST['loginpassword']); 
            $login_que="SELECT * FROM users WHERE email='$x' AND password='$y'";
            //$query="SELECT * FROM users WHERE email='".mysqli_real_escape_string($link,$_POST['loginemail'])."' AND password='".md5(md5($_POST['loginemail'].$_POST['loginpassword']))."'"; 
             $result1=mysqli_query($link,$login_que);
             $row=mysqli_fetch_array($result1);
-            print_r($row);
+            //print_r($row);
             if($row){
                 $_SESSION['id']=$row['id'];
-                print_r($_SESSION);
+                //print_r($_SESSION);
+                header("Location:mainpage.php");
             }
             else{
-                echo "we could not find a user with the email and password.Sign Up!!";
+                $error="we could not find a user with the email and password.Sign Up!!";
             }
             }
         }
