@@ -15,7 +15,7 @@
        ?>
     </head>
     <body>
-        <div class="navbar navbar-default">
+        <div class="nav navbar-default">
 
             <div class="container">
 
@@ -45,7 +45,7 @@
                             <input type="email" name="loginemail" class="form-control" placeholder="EmailId" value="<?php if(isset($_POST['loginemail'])) echo addslashes($_POST['loginemail']); ?>"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" name="loginpassword" class="form-control" placeholder="password" value="<?php if(isset($_POST['loginpassword'])) echo addslashes($_POST['loginpassword']); ?>"/>
+                            <input type="password" name="loginpassword" class="form-control" placeholder="password" value="<?php if(isset($_POST['loginpassword'])) echo ($_POST['loginpassword']); ?>"/>
                         </div>
                         <input type="submit" class="btn btn-success" name="submit" value="login">
                     </form>
@@ -55,8 +55,8 @@
         </div>
         <div class="container contentContainer" id="topContainer">
 
-            <div class="row center" id="content">
-                <div class="col-md-6 col-md-offset-3 center">
+            <div class="row center ">
+                <div class="col-md-6 col-md-offset-3 center marginTop ">
                      <h1>Secert Dairy</h1>
                     <p class="lead center">With You wherever you go!</p>
                     <?php
@@ -75,15 +75,20 @@
                     <label class="center "> Interested Sign up here!</label>
                     <form class="marginTop " method="post">
                         <div class="form-group">
+                        <label for="name">Name::
+                        </label><input type="text" name="name" class="form-control" value="<?php if(isset($_POST['name'])) echo addslashes($_POST['name']); ?>"/><br/>
+                        </div>
+                        <div class="form-group">
                         <label for="email">Email Id::
                         </label>
                         <input type="email" name="email" class="form-control" value="<?php if(isset($_POST['email'])) echo addslashes($_POST['email']); ?>"/><br/>
                         </div>
                         <div class="form-group">
                         <label for="password">Password::
-                        </label><input type="password" name="password" class="form-control" value="<?php if(isset($_POST['password'])) echo addslashes($_POST['password']); ?>"/><br/>
+                        </label><input type="password" name="password" class="form-control" value="<?php if(isset($_POST['password'])) echo ($_POST['password']); ?>"/><br/>
                         </div>
-                        <input type="submit" name="submit" value="submit" class="btn btn-success" />
+                        
+                        <input type="submit" name="submit" value="signup" class="btn btn-success" />
                     </form>
 
 
@@ -98,7 +103,7 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
 
-            $(".contentContainer").css("min-height", $(window).height());
+            $(".contentContainer").css("min-height", $(window).height()-50);
         </script>
     </body>
 </html>

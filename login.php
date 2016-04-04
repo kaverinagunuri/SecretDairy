@@ -15,10 +15,11 @@
                $error.="please enter the email id <br/>";
             else if (!(filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)))
                     $error.="please enter valid email id <br/>";
-            
-            
+            if(!$_POST['name'])
+            { $error.="please enter the name";   }         
             if(!$_POST['password'])
                  $error.="please enter the password <br/>";
+            
             else{
                 
                 
@@ -39,14 +40,14 @@
                 $error="The email address is already registered .if U want to login IN?";
            else
            {
-               $query="INSERT INTO users (email,password) VALUES('".mysqli_real_escape_string($link,$_POST['email'])."', '".($_POST['password'])."')";
+               $query="INSERT INTO users (email,password,name) VALUES('".mysqli_real_escape_string($link,$_POST['email'])."', '".($_POST['password'])."','".($_POST['name'])."')";
                
                
                mysqli_query($link,$query);
-                 echo "you were successfully signed!";
-                 $_SESSION['id']=mysqli_insert_id($link);
-                // print_r($_SESSION);
-                  header("Location:mainpage.php");
+                $msg.="you were successfully signed!";
+                // $_SESSION['id']=mysqli_insert_id($link);
+       //echo $_SESSION['id'];
+                  //header("Location:mainpage.php");
  
            }
            

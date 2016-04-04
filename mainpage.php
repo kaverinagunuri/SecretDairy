@@ -13,11 +13,11 @@
          <?php
          session_start();
            include("connection.php");
-           $query="SELECT dairy FROM users WHERE id='".$_SESSION['id']."' LIMIT 1";
+           $query="SELECT * FROM users WHERE id='".$_SESSION['id']."' LIMIT 1";
            $result=mysqli_query($link,$query);
            $row=mysqli_fetch_array($result);
            $dairy=$row['dairy'];
-           
+           $name=$row['name'];
          
          
          ?>
@@ -46,7 +46,8 @@
         <div class="container contentContainer" id="topContainer">
 
             <div class="row center marginTop">
-                <div class="col-md-6 col-md-offset-3 center ">
+                <div class="col-md-1" ><h1 style="color: white">WELCOME  <?php echo $name;?></h1></div>
+                <div class="col-md-6 col-md-offset-2 center ">
                     <textarea class="form-control"><?php echo $dairy; ?></textarea>
 
             </div>
